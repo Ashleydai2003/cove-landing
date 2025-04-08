@@ -1,4 +1,5 @@
 import { Libre_Bodoni, Berkshire_Swash } from 'next/font/google'
+import { useState } from 'react'
 
 const berkshireSwash = Berkshire_Swash({
   weight: ['400'],
@@ -13,6 +14,54 @@ const libreBodoni = Libre_Bodoni({
 })
 
 export default function Home() {
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    age: '',
+    phoneNumber: '',
+    city: ''
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    
+    // Special handling for age and phone number
+    if (name === 'age') {
+      // Only allow numbers and limit to 3 digits
+      if (value === '' || (/^\d+$/.test(value) && value.length <= 3)) {
+        setFormData(prev => ({
+          ...prev,
+          [name]: value
+        }));
+      }
+    } else if (name === 'phoneNumber') {
+      // Format phone number as user types
+      const cleaned = value.replace(/\D/g, '');
+      const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,4})$/);
+      if (match) {
+        const formatted = match[1] + (match[2] ? '-' + match[2] : '') + (match[3] ? '-' + match[3] : '');
+        setFormData(prev => ({
+          ...prev,
+          [name]: formatted
+        }));
+      }
+    } else if (name === 'city') {
+      // Allow letters, spaces, and hyphens for city names
+      if (value === '' || /^[a-zA-Z\s-]+$/.test(value)) {
+        setFormData(prev => ({
+          ...prev,
+          [name]: value
+        }));
+      }
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
+  };
+
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
       {/* Background image container */}
@@ -31,15 +80,62 @@ export default function Home() {
           <p className={`${libreBodoni.className} text-xl text-center text-[#7a3131ff] dark:text-white font-bold opacity-0 fade-in`} style={{ animationDelay: '1500ms' }}>
             plug back into community.
           </p>
-          {/* Button fades in after 2000ms */}
-          <button className={`${libreBodoni.className} mt-10 px-8 py-3 bg-[#7a3131ff] text-white dark:bg-white dark:text-black rounded-md font-bold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors opacity-0 fade-in`} style={{ animationDelay: '2000ms' }}>
-            <a 
-              href="https://forms.gle/Nrd9MM53PktZeYSw6" 
-              rel="noopener noreferrer"
-            >
-              join the waitlist
-            </a>
-          </button>
+          
+          {/* Form or Button container */}
+          <div className="mt-10">
+            {!showForm ? (
+              <button 
+                onClick={() => setShowForm(true)}
+                className={`${libreBodoni.className} px-8 py-3 bg-[#7a3131ff] text-white dark:bg-white dark:text-black rounded-md font-bold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors opacity-0 fade-in`} 
+                style={{ animationDelay: '2000ms' }}
+              >
+                join the waitlist
+              </button>
+            ) : (
+              <form className="flex flex-col gap-4 opacity-0 fade-in">
+                <input
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleInputChange}
+                  placeholder="First Name"
+                  className={`${libreBodoni.className} px-4 py-2 rounded-md bg-white/90 dark:bg-gray-800/90 text-[#7a3131ff] dark:text-white border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#7a3131ff] dark:focus:ring-white`}
+                />
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                  placeholder="Last Name"
+                  className={`${libreBodoni.className} px-4 py-2 rounded-md bg-white/90 dark:bg-gray-800/90 text-[#7a3131ff] dark:text-white border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#7a3131ff] dark:focus:ring-white`}
+                />
+                <input
+                  type="text"
+                  name="age"
+                  value={formData.age}
+                  onChange={handleInputChange}
+                  placeholder="Age"
+                  className={`${libreBodoni.className} px-4 py-2 rounded-md bg-white/90 dark:bg-gray-800/90 text-[#7a3131ff] dark:text-white border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#7a3131ff] dark:focus:ring-white`}
+                />
+                <input
+                  type="text"
+                  name="phoneNumber"
+                  value={formData.phoneNumber}
+                  onChange={handleInputChange}
+                  placeholder="Phone Number (e.g., 123-456-7890)"
+                  className={`${libreBodoni.className} px-4 py-2 rounded-md bg-white/90 dark:bg-gray-800/90 text-[#7a3131ff] dark:text-white border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#7a3131ff] dark:focus:ring-white`}
+                />
+                <input
+                  type="text"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleInputChange}
+                  placeholder="City"
+                  className={`${libreBodoni.className} px-4 py-2 rounded-md bg-white/90 dark:bg-gray-800/90 text-[#7a3131ff] dark:text-white border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#7a3131ff] dark:focus:ring-white`}
+                />
+              </form>
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -20,93 +20,42 @@ body {
 
 /* for our flickering background */
 @keyframes backgroundRotate {
-  0%, 6% {
-    background-image: url('/image1.svg');
-    opacity: 1;
-    transform: scale(1);
-  }
-  7%, 13% {
-    background-image: url('/image2.svg');
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  14%, 20% {
-    background-image: url('/image3.svg');
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  21%, 27% {
-    background-image: url('/image4.svg');
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  28%, 34% {
-    background-image: url('/image5.svg');
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  35%, 41% {
-    background-image: url('/image6.svg');
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  42%, 48% {
-    background-image: url('/image7.svg');
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  49%, 55% {
-    background-image: url('/image8.svg');
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  56%, 62% {
-    background-image: url('/image9.svg');
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  63%, 69% {
-    background-image: url('/image10.svg');
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  70%, 76% {
-    background-image: url('/image11.svg');
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  77%, 83% {
-    background-image: url('/image12.svg');
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  84%, 90% {
-    background-image: url('/image13.svg');
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  91%, 97% {
-    background-image: url('/image14.svg');
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  98%, 99% {
-    opacity: 0.7;
-    transform: scale(1.02);
-  }
-  100% {
-    background-image: url('/image1.svg');
-    opacity: 1;
-    transform: scale(1);
-  }
+  /* Initial fast flickering */
+  0%, 3% { background-image: url('/image1.svg'); opacity: 1; }
+  3.1%, 6% { background-image: url('/image2.svg'); opacity: 1; }
+  6.1%, 9% { background-image: url('/image3.svg'); opacity: 1; }
+  9.1%, 12% { background-image: url('/image4.svg'); opacity: 1; }
+  12.1%, 15% { background-image: url('/image5.svg'); opacity: 1; }
+  15.1%, 18% { background-image: url('/image6.svg'); opacity: 1; }
+  18.1%, 21% { background-image: url('/image7.svg'); opacity: 1; }
+  21.1%, 24% { background-image: url('/image8.svg'); opacity: 1; }
+  24.1%, 27% { background-image: url('/image9.svg'); opacity: 1; }
+  27.1%, 30% { background-image: url('/image10.svg'); opacity: 1; }
+  30.1%, 33% { background-image: url('/image11.svg'); opacity: 1; }
+  33.1%, 36% { background-image: url('/image12.svg'); opacity: 1; }
+  36.1%, 39% { background-image: url('/image13.svg'); opacity: 1; }
+  39.1%, 42% { background-image: url('/image14.svg'); opacity: 1; }
+
+  /* Gradual slowdown */
+  42.1%, 45% { background-image: url('/image1.svg'); opacity: 1; }
+  45.1%, 48% { background-image: url('/image2.svg'); opacity: 1; }
+  48.1%, 51% { background-image: url('/image3.svg'); opacity: 1; }
+  51.1%, 55% { background-image: url('/image4.svg'); opacity: 1; }
+  55.1%, 59% { background-image: url('/image5.svg'); opacity: 1; }
+  59.1%, 64% { background-image: url('/image6.svg'); opacity: 1; }
+  64.1%, 69% { background-image: url('/image7.svg'); opacity: 1; }
+  69.1%, 75% { background-image: url('/image8.svg'); opacity: 1; }
+  75.1%, 81% { background-image: url('/image9.svg'); opacity: 1; }
+  81.1%, 87% { background-image: url('/image10.svg'); opacity: 1; }
+  87.1%, 93% { background-image: url('/image11.svg'); opacity: 1; }
+  93.1%, 100% { background-image: url('/image12.svg'); opacity: 1; }
 }
 
 .animate-backgroundRotate {
-  animation: backgroundRotate 1s infinite;
-  transition: all 0.1s ease-in-out;
+  animation: backgroundRotate 3.9s cubic-bezier(0.1, 0.1, 0.2, 1) forwards;
   background-size: cover;
   background-position: center;
-  will-change: transform, opacity;
+  will-change: opacity;
 }
 
 /* for our fade in words and overlay */
@@ -125,9 +74,9 @@ body {
 }
 
 .delay-500 {
-  animation-delay: 500ms;
+  animation-delay: 2000ms;  /* Overlay appears at 2.5 seconds */
 }
 
 .delay-1000 {
-  animation-delay: 1000ms;
+  animation-delay: 2500ms;  /* Content appears at 3 seconds */
 }

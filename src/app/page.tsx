@@ -1,4 +1,10 @@
-import { Libre_Bodoni } from 'next/font/google'
+import { Libre_Bodoni, Berkshire_Swash } from 'next/font/google'
+
+const berkshireSwash = Berkshire_Swash({
+  weight: ['400'],
+  subsets: ['latin'],
+  style: ['normal']
+})
 
 const libreBodoni = Libre_Bodoni({
   weight: ['400', '700'],
@@ -18,7 +24,7 @@ export default function Home() {
       <div className="relative z-10 flex items-center justify-center min-h-screen bg-white/60 dark:bg-[#7a3131ff]/80 opacity-0 fade-in delay-500">
         <div className="flex flex-col items-center">
           {/* Title fades in after 1000ms */}
-          <h1 className={`${libreBodoni.className} text-9xl text-[#7a3131ff] dark:text-white text-center opacity-0 fade-in delay-1000`}>
+          <h1 className={`${berkshireSwash.className} text-9xl text-[#7a3131ff] dark:text-white text-center opacity-0 fade-in delay-1000 transform -skew-x-12`}>
             cove
           </h1>
           {/* Subtitle fades in after 1500ms */}

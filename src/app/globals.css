@@ -18,6 +18,23 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Add viewport height handling for mobile */
+html, body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  width: 100%;
+}
+
+/* Handle iPhone safe areas */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
 /* for our flickering background */
 @keyframes backgroundRotate {
   /* Initial fast flickering */
@@ -56,6 +73,16 @@ body {
   background-size: cover;
   background-position: center;
   will-change: opacity;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 /* for our fade in words and overlay */

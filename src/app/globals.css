@@ -2,7 +2,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #7a3131ff;
 }
 
 @theme inline {
@@ -14,8 +14,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #7a3131ff;
+    --foreground: #ffffff;
   }
 }
 
@@ -23,4 +23,118 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* for our flickering background */
+@keyframes backgroundRotate {
+  0%, 6% {
+    background-image: url('/image1.svg');
+    opacity: 1;
+    transform: scale(1);
+  }
+  7%, 13% {
+    background-image: url('/image2.svg');
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  14%, 20% {
+    background-image: url('/image3.svg');
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  21%, 27% {
+    background-image: url('/image4.svg');
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  28%, 34% {
+    background-image: url('/image5.svg');
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  35%, 41% {
+    background-image: url('/image6.svg');
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  42%, 48% {
+    background-image: url('/image7.svg');
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  49%, 55% {
+    background-image: url('/image8.svg');
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  56%, 62% {
+    background-image: url('/image9.svg');
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  63%, 69% {
+    background-image: url('/image10.svg');
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70%, 76% {
+    background-image: url('/image11.svg');
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  77%, 83% {
+    background-image: url('/image12.svg');
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  84%, 90% {
+    background-image: url('/image13.svg');
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  91%, 97% {
+    background-image: url('/image14.svg');
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  98%, 99% {
+    opacity: 0.7;
+    transform: scale(1.02);
+  }
+  100% {
+    background-image: url('/image1.svg');
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-backgroundRotate {
+  animation: backgroundRotate 1s infinite;
+  transition: all 0.1s ease-in-out;
+  background-size: cover;
+  background-position: center;
+  will-change: transform, opacity;
+}
+
+/* for our fade in words and overlay */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 2s ease-in forwards;
+  opacity: 0;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
+
+.delay-1000 {
+  animation-delay: 1000ms;
 }

@@ -14,14 +14,14 @@ const libreBodoni = Libre_Bodoni({
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen">
+    <div className="relative h-screen w-screen overflow-hidden">
       {/* Background image container */}
-      <div className="fixed inset-0 z-0 overflow-hidden">
-        <div className="absolute inset-0 w-[100vw] h-[100vh] bg-[url('/image1.jpg')] bg-cover bg-center bg-no-repeat animate-backgroundRotate dark:invert-0" />
+      <div className="fixed top-0 left-0 right-0 bottom-0 z-0">
+        <div className="absolute inset-0 bg-[url('/image1.jpg')] animate-backgroundRotate" />
       </div>
 
       {/* Content container with semi-transparent overlay - fades in after 500ms */}
-      <div className="relative z-10 flex items-center justify-center min-h-screen bg-white/60 dark:bg-[#7a3131ff]/80 opacity-0 fade-in delay-500">
+      <div className="relative z-10 flex items-center justify-center h-screen w-screen bg-white/60 dark:bg-[#7a3131ff]/80 opacity-0 fade-in delay-500">
         <div className="flex flex-col items-center">
           {/* Title fades in after 1000ms */}
           <h1 className={`${berkshireSwash.className} text-9xl text-[#7a3131ff] dark:text-white text-center opacity-0 fade-in delay-1000 transform -skew-x-12`}>

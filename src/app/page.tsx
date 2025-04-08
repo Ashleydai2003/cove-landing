@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Libre_Bodoni } from 'next/font/google'
 
 const libreBodoni = Libre_Bodoni({

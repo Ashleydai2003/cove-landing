@@ -1,5 +1,15 @@
+'use client';
+
 import { Libre_Bodoni, Berkshire_Swash } from 'next/font/google'
-import { useState } from 'react'
+import { useState, ChangeEvent } from 'react'
+
+interface FormData {
+  firstName: string;
+  lastName: string;
+  age: string;
+  phoneNumber: string;
+  city: string;
+}
 
 const berkshireSwash = Berkshire_Swash({
   weight: ['400'],
@@ -15,7 +25,7 @@ const libreBodoni = Libre_Bodoni({
 
 export default function Home() {
   const [showForm, setShowForm] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     firstName: '',
     lastName: '',
     age: '',
@@ -23,7 +33,7 @@ export default function Home() {
     city: ''
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     
     // Special handling for age and phone number

@@ -24,7 +24,7 @@ body {
 }
 
 /* for our flickering background */
-@keyframes backgroundRotate {
+/* @keyframes backgroundRotate {
   /* Initial fast flickering */
   0%, 3% { background-image: url('/image1.svg'); }
   3.1%, 6% { background-image: url('/image2.svg'); }
@@ -54,7 +54,7 @@ body {
   81.1%, 87% { background-image: url('/image10.svg'); }
   87.1%, 93% { background-image: url('/image11.svg'); }
   93.1%, 100% { background-image: url('/image12.svg'); }
-}
+} */
 
 .animate-backgroundRotate {
   animation: backgroundRotate 3.9s cubic-bezier(0.1, 0.1, 0.2, 1) forwards;

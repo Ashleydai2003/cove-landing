@@ -4,11 +4,10 @@ import { Libre_Bodoni, Berkshire_Swash } from 'next/font/google'
 import { useState, ChangeEvent } from 'react'
 
 interface FormData {
-  firstName: string;
-  lastName: string;
-  age: string;
+  fullName: string;
   phoneNumber: string;
   city: string;
+  age: string;
 }
 
 const berkshireSwash = Berkshire_Swash({
@@ -26,11 +25,10 @@ const libreBodoni = Libre_Bodoni({
 export default function Home() {
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState<FormData>({
-    firstName: '',
-    lastName: '',
-    age: '',
+    fullName: '',
     phoneNumber: '',
-    city: ''
+    city: '',
+    age: ''
   });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -103,28 +101,15 @@ export default function Home() {
               </button>
             ) : (
               <form className="flex flex-col gap-4 opacity-0 fade-in">
+                <p className={`${libreBodoni.className} text-white/80 text-sm text-center mb-2`}>
+                  your information is private.
+                </p>
                 <input
                   type="text"
-                  name="firstName"
-                  value={formData.firstName}
+                  name="fullName"
+                  value={formData.fullName}
                   onChange={handleInputChange}
-                  placeholder="First Name"
-                  className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50`}
-                />
-                <input
-                  type="text"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleInputChange}
-                  placeholder="Last Name"
-                  className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50`}
-                />
-                <input
-                  type="text"
-                  name="age"
-                  value={formData.age}
-                  onChange={handleInputChange}
-                  placeholder="Age"
+                  placeholder="first and last name"
                   className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50`}
                 />
                 <input
@@ -132,7 +117,7 @@ export default function Home() {
                   name="phoneNumber"
                   value={formData.phoneNumber}
                   onChange={handleInputChange}
-                  placeholder="Phone Number (e.g., 123-456-7890)"
+                  placeholder="phone number"
                   className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50`}
                 />
                 <input
@@ -140,7 +125,15 @@ export default function Home() {
                   name="city"
                   value={formData.city}
                   onChange={handleInputChange}
-                  placeholder="City"
+                  placeholder="city"
+                  className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50`}
+                />
+                <input
+                  type="text"
+                  name="age"
+                  value={formData.age}
+                  onChange={handleInputChange}
+                  placeholder="age"
                   className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50`}
                 />
               </form>

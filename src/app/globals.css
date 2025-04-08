@@ -24,49 +24,46 @@ body {
 /* for our flickering background */
 @keyframes backgroundRotate {
   /* Initial fast flickering */
-  0%, 3% { background-image: url('/image1.svg'); opacity: 1; }
-  3.1%, 6% { background-image: url('/image2.svg'); opacity: 1; }
-  6.1%, 9% { background-image: url('/image3.svg'); opacity: 1; }
-  9.1%, 12% { background-image: url('/image4.svg'); opacity: 1; }
-  12.1%, 15% { background-image: url('/image5.svg'); opacity: 1; }
-  15.1%, 18% { background-image: url('/image6.svg'); opacity: 1; }
-  18.1%, 21% { background-image: url('/image7.svg'); opacity: 1; }
-  21.1%, 24% { background-image: url('/image8.svg'); opacity: 1; }
-  24.1%, 27% { background-image: url('/image9.svg'); opacity: 1; }
-  27.1%, 30% { background-image: url('/image10.svg'); opacity: 1; }
-  30.1%, 33% { background-image: url('/image11.svg'); opacity: 1; }
-  33.1%, 36% { background-image: url('/image12.svg'); opacity: 1; }
-  36.1%, 39% { background-image: url('/image13.svg'); opacity: 1; }
-  39.1%, 42% { background-image: url('/image14.svg'); opacity: 1; }
+  0%, 3% { background-image: url('/image1.svg'); }
+  3.1%, 6% { background-image: url('/image2.svg'); }
+  6.1%, 9% { background-image: url('/image3.svg'); }
+  9.1%, 12% { background-image: url('/image4.svg'); }
+  12.1%, 15% { background-image: url('/image5.svg'); }
+  15.1%, 18% { background-image: url('/image6.svg'); }
+  18.1%, 21% { background-image: url('/image7.svg'); }
+  21.1%, 24% { background-image: url('/image8.svg'); }
+  24.1%, 27% { background-image: url('/image9.svg'); }
+  27.1%, 30% { background-image: url('/image10.svg'); }
+  30.1%, 33% { background-image: url('/image11.svg'); }
+  33.1%, 36% { background-image: url('/image12.svg'); }
+  36.1%, 39% { background-image: url('/image13.svg'); }
+  39.1%, 42% { background-image: url('/image14.svg'); }
 
   /* Gradual slowdown */
-  42.1%, 45% { background-image: url('/image1.svg'); opacity: 1; }
-  45.1%, 48% { background-image: url('/image2.svg'); opacity: 1; }
-  48.1%, 51% { background-image: url('/image3.svg'); opacity: 1; }
-  51.1%, 55% { background-image: url('/image4.svg'); opacity: 1; }
-  55.1%, 59% { background-image: url('/image5.svg'); opacity: 1; }
-  59.1%, 64% { background-image: url('/image6.svg'); opacity: 1; }
-  64.1%, 69% { background-image: url('/image7.svg'); opacity: 1; }
-  69.1%, 75% { background-image: url('/image8.svg'); opacity: 1; }
-  75.1%, 81% { background-image: url('/image9.svg'); opacity: 1; }
-  81.1%, 87% { background-image: url('/image10.svg'); opacity: 1; }
-  87.1%, 93% { background-image: url('/image11.svg'); opacity: 1; }
-  93.1%, 100% { background-image: url('/image12.svg'); opacity: 1; }
+  42.1%, 45% { background-image: url('/image1.svg'); }
+  45.1%, 48% { background-image: url('/image2.svg'); }
+  48.1%, 51% { background-image: url('/image3.svg'); }
+  51.1%, 55% { background-image: url('/image4.svg'); }
+  55.1%, 59% { background-image: url('/image5.svg'); }
+  59.1%, 64% { background-image: url('/image6.svg'); }
+  64.1%, 69% { background-image: url('/image7.svg'); }
+  69.1%, 75% { background-image: url('/image8.svg'); }
+  75.1%, 81% { background-image: url('/image9.svg'); }
+  81.1%, 87% { background-image: url('/image10.svg'); }
+  87.1%, 93% { background-image: url('/image11.svg'); }
+  93.1%, 100% { background-image: url('/image12.svg'); }
 }
 
 .animate-backgroundRotate {
   animation: backgroundRotate 3.9s cubic-bezier(0.1, 0.1, 0.2, 1) forwards;
+  position: fixed;  /* Changed from absolute to fixed */
+  inset: 0;  /* Shorthand for top: 0; right: 0; bottom: 0; left: 0; */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100vw;
-  height: 100vh;
-  will-change: transform, opacity;
+  min-height: 100dvh;  /* Using dynamic viewport height */
+  width: 100%;
+  will-change: background-image;
 }
 
 /* for our fade in words and overlay */

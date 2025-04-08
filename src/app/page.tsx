@@ -80,63 +80,73 @@ export default function Home() {
       {/* Content container with semi-transparent overlay - fades in after 500ms */}
       <div className="relative z-10 flex items-center justify-center min-h-screen w-full bg-white/60 dark:bg-[#7a3131ff]/80 opacity-0 fade-in delay-500">
         <div className="flex flex-col items-center">
-          {/* Title fades in after 1000ms */}
-          <h1 className={`${berkshireSwash.className} text-9xl text-[#7a3131ff] dark:text-white text-center opacity-0 fade-in delay-1000 transform -skew-x-12`}>
-            cove
-          </h1>
-          {/* Subtitle fades in after 1500ms */}
-          <p className={`${libreBodoni.className} text-xl text-center text-[#7a3131ff] dark:text-white font-bold opacity-0 fade-in`} style={{ animationDelay: '1500ms' }}>
-            plug back into community.
-          </p>
+          {/* Logo and subtitle container */}
+          <div>
+            {/* Title fades in after 1000ms */}
+            <h1 className={`${berkshireSwash.className} text-9xl text-[#7a3131ff] dark:text-white text-center opacity-0 fade-in delay-1000 transform -skew-x-12 ${showForm ? 'float-up' : ''}`}>
+              cove
+            </h1>
+            {/* Subtitle fades in after 1500ms */}
+            <p className={`${libreBodoni.className} text-xl text-center text-[#7a3131ff] dark:text-white font-bold opacity-0 fade-in ${showForm ? 'float-up' : ''}`} style={{ animationDelay: '1500ms' }}>
+              plug back into community.
+            </p>
+          </div>
           
           {/* Form or Button container */}
           <div className="mt-10">
             {!showForm ? (
               <button 
                 onClick={() => setShowForm(true)}
-                className={`${libreBodoni.className} px-8 py-3 bg-[#7a3131ff] text-white dark:bg-white dark:text-black rounded-md font-bold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors opacity-0 fade-in`} 
-                style={{ animationDelay: '2000ms' }}
+                className={`${libreBodoni.className} px-11 py-3 bg-[#7a3131ff] text-white dark:bg-white dark:text-black rounded-md font-bold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors fade-in`} 
+                style={{ animationDelay: '1500ms' }}
               >
                 join the waitlist
               </button>
             ) : (
-              <form className="flex flex-col gap-4 opacity-0 fade-in">
-                <p className={`${libreBodoni.className} text-white/80 text-sm text-center mb-2`}>
-                  your information is private.
-                </p>
-                <input
-                  type="text"
-                  name="fullName"
-                  value={formData.fullName}
-                  onChange={handleInputChange}
-                  placeholder="first and last name"
-                  className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50`}
-                />
-                <input
-                  type="text"
-                  name="phoneNumber"
-                  value={formData.phoneNumber}
-                  onChange={handleInputChange}
-                  placeholder="phone number"
-                  className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50`}
-                />
-                <input
-                  type="text"
-                  name="city"
-                  value={formData.city}
-                  onChange={handleInputChange}
-                  placeholder="city"
-                  className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50`}
-                />
-                <input
-                  type="text"
-                  name="age"
-                  value={formData.age}
-                  onChange={handleInputChange}
-                  placeholder="age"
-                  className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50`}
-                />
-              </form>
+              <div className="relative">
+                <button 
+                  className={`${libreBodoni.className} px-8 py-3 bg-[#7a3131ff] text-white dark:bg-white dark:text-black rounded-md font-bold float-down absolute`}
+                >
+                  join the waitlist
+                </button>
+                <form className="flex flex-col gap-4 form-fade-in">
+                  <p className={`${libreBodoni.className} text-white/80 text-sm text-center mb-2`}>
+                    your information is private.
+                  </p>
+                  <input
+                    type="text"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleInputChange}
+                    placeholder="first and last name"
+                    className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50`}
+                  />
+                  <input
+                    type="text"
+                    name="phoneNumber"
+                    value={formData.phoneNumber}
+                    onChange={handleInputChange}
+                    placeholder="phone number"
+                    className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50`}
+                  />
+                  <input
+                    type="text"
+                    name="city"
+                    value={formData.city}
+                    onChange={handleInputChange}
+                    placeholder="city"
+                    className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50`}
+                  />
+                  <input
+                    type="text"
+                    name="age"
+                    value={formData.age}
+                    onChange={handleInputChange}
+                    placeholder="age"
+                    className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50`}
+                  />
+                </form>
+              </div>
             )}
           </div>
         </div>

@@ -79,9 +79,27 @@ body {
   }
 }
 
+@keyframes floatDown {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(300px);
+  }
+}
+
 .fade-in {
   animation: fadeIn 1s ease-in forwards;
   opacity: 0;
+}
+
+.float-down {
+  animation: floatDown 1s ease-out forwards;
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
 
 .delay-500 {
@@ -90,4 +108,14 @@ body {
 
 .delay-1000 {
   animation-delay: 2500ms;  /* Content appears at 3 seconds */
+}
+
+.form-delay {
+  animation-delay: 3000ms;  /* Form appears after button movement */
+}
+
+.form-fade-in {
+  animation: fadeIn 1s ease-in forwards;
+  animation-delay: 1s;
+  opacity: 0;
 }

@@ -109,7 +109,7 @@ export default function Home() {
                   value={formData.firstName}
                   onChange={handleInputChange}
                   placeholder="First Name"
-                  className={`${libreBodoni.className} px-4 py-2 rounded-md bg-white/90 dark:bg-gray-800/90 text-[#7a3131ff] dark:text-white border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#7a3131ff] dark:focus:ring-white`}
+                  className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50`}
                 />
                 <input
                   type="text"
@@ -117,7 +117,7 @@ export default function Home() {
                   value={formData.lastName}
                   onChange={handleInputChange}
                   placeholder="Last Name"
-                  className={`${libreBodoni.className} px-4 py-2 rounded-md bg-white/90 dark:bg-gray-800/90 text-[#7a3131ff] dark:text-white border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#7a3131ff] dark:focus:ring-white`}
+                  className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50`}
                 />
                 <input
                   type="text"
@@ -125,7 +125,7 @@ export default function Home() {
                   value={formData.age}
                   onChange={handleInputChange}
                   placeholder="Age"
-                  className={`${libreBodoni.className} px-4 py-2 rounded-md bg-white/90 dark:bg-gray-800/90 text-[#7a3131ff] dark:text-white border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#7a3131ff] dark:focus:ring-white`}
+                  className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50`}
                 />
                 <input
                   type="text"
@@ -133,7 +133,7 @@ export default function Home() {
                   value={formData.phoneNumber}
                   onChange={handleInputChange}
                   placeholder="Phone Number (e.g., 123-456-7890)"
-                  className={`${libreBodoni.className} px-4 py-2 rounded-md bg-white/90 dark:bg-gray-800/90 text-[#7a3131ff] dark:text-white border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#7a3131ff] dark:focus:ring-white`}
+                  className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50`}
                 />
                 <input
                   type="text"
@@ -141,7 +141,7 @@ export default function Home() {
                   value={formData.city}
                   onChange={handleInputChange}
                   placeholder="City"
-                  className={`${libreBodoni.className} px-4 py-2 rounded-md bg-white/90 dark:bg-gray-800/90 text-[#7a3131ff] dark:text-white border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#7a3131ff] dark:focus:ring-white`}
+                  className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50`}
                 />
               </form>
             )}

@@ -25,8 +25,8 @@ body {
 
 /* for our flickering background */
 @keyframes backgroundRotate {
-  /* Initial fast flickering */
-  /* 0%, 3% { background-image: url('/image1.svg'); }
+  /*Initial fast flickering */
+  0%, 3% { background-image: url('/image1.svg'); }
   3.1%, 6% { background-image: url('/image2.svg'); }
   6.1%, 9% { background-image: url('/image3.svg'); }
   9.1%, 12% { background-image: url('/image4.svg'); }
@@ -39,7 +39,7 @@ body {
   30.1%, 33% { background-image: url('/image11.svg'); }
   33.1%, 36% { background-image: url('/image12.svg'); }
   36.1%, 39% { background-image: url('/image13.svg'); }
-  39.1%, 42% { background-image: url('/image14.svg'); } */
+  39.1%, 42% { background-image: url('/image14.svg'); }
 
   /* Gradual slowdown */
   42.1%, 45% { background-image: url('/image1.svg'); }
@@ -80,7 +80,7 @@ body {
 }
 
 .fade-in {
-  animation: fadeIn 2s ease-in forwards;
+  animation: fadeIn 1s ease-in forwards;
   opacity: 0;
 }
 

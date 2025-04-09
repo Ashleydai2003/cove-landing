@@ -1,1 +1,1 @@
-This is Cove's landing page, built with Next.js and tailwind.
+This is Cove's landing page, built with Next.js and tailwind

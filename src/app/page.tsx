@@ -54,6 +54,14 @@ export default function Home() {
           [name]: formatted
         }));
       }
+    } else if (name === 'fullName') {
+      // Only allow letters, spaces, and hyphens for names
+      if (value === '' || /^[a-zA-Z\s-]+$/.test(value)) {
+        setFormData(prev => ({
+          ...prev,
+          [name]: value
+        }));
+      }
     } else if (name === 'city') {
       // Allow letters, spaces, and hyphens for city names
       if (value === '' || /^[a-zA-Z\s-]+$/.test(value)) {
@@ -83,11 +91,11 @@ export default function Home() {
           {/* Logo and subtitle container */}
           <div>
             {/* Title fades in after 1000ms */}
-            <h1 className={`${berkshireSwash.className} text-9xl text-[#7a3131ff] dark:text-white text-center opacity-0 fade-in delay-1000 transform -skew-x-12 ${showForm ? 'float-up' : ''}`}>
+            <h1 className={`${berkshireSwash.className} text-9xl text-[#7a3131ff] dark:text-white text-center opacity-0 fade-in delay-1000 transform -skew-x-12`}>
               cove
             </h1>
-            {/* Subtitle fades in after 1500ms */}
-            <p className={`${libreBodoni.className} text-xl text-center text-[#7a3131ff] dark:text-white font-bold opacity-0 fade-in ${showForm ? 'float-up' : ''}`} style={{ animationDelay: '1500ms' }}>
+            {/* Subtitle fades in too */}
+            <p className={`${libreBodoni.className} text-xl text-center text-[#7a3131ff] dark:text-white font-bold opacity-0 fade-in delay-1000`}>
               plug back into community.
             </p>
           </div>
@@ -97,10 +105,9 @@ export default function Home() {
             {!showForm ? (
               <button 
                 onClick={() => setShowForm(true)}
-                className={`${libreBodoni.className} px-11 py-3 bg-[#7a3131ff] text-white dark:bg-white dark:text-black rounded-md font-bold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors fade-in`} 
-                style={{ animationDelay: '1500ms' }}
+                className={`${libreBodoni.className} px-11 py-3 bg-[#7a3131ff] text-white dark:bg-white dark:text-black rounded-md font-bold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors fade-in delay-1000`} 
               >
-                join the waitlist
+              join the waitlist
               </button>
             ) : (
               <div className="relative">

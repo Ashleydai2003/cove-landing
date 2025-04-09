@@ -24,6 +24,7 @@ const libreBodoni = Libre_Bodoni({
 
 export default function Home() {
   const [showForm, setShowForm] = useState(false);
+  const [buttonAnimationComplete, setButtonAnimationComplete] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
     phoneNumber: '',
@@ -107,12 +108,14 @@ export default function Home() {
                 onClick={() => setShowForm(true)}
                 className={`${libreBodoni.className} px-11 py-3 bg-[#7a3131ff] text-white dark:bg-white dark:text-black rounded-md font-bold hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors fade-in delay-1000`} 
               >
-              join the waitlist
+                join the waitlist
               </button>
             ) : (
               <div className="relative">
                 <button 
-                  className={`${libreBodoni.className} px-8 py-3 bg-[#7a3131ff] text-white dark:bg-white dark:text-black rounded-md font-bold float-down absolute`}
+                  onAnimationEnd={() => setButtonAnimationComplete(true)}
+                  className={`${libreBodoni.className} px-11 py-3 bg-[#7a3131ff] text-white dark:bg-white dark:text-black rounded-md font-bold float-down absolute ${buttonAnimationComplete ? 'hover:bg-[#4a1919] dark:hover:bg-gray-200 transition-colors duration-300' : ''}`}
+                  style={{ transform: buttonAnimationComplete ? 'translateY(300px)' : '' }}
                 >
                   join the waitlist
                 </button>

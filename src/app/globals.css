@@ -95,7 +95,6 @@ body {
 
 .float-down {
   animation: floatDown 1s ease-out forwards;
-  pointer-events: none;
   position: absolute;
   left: 0;
   right: 0;

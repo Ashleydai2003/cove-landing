@@ -95,7 +95,6 @@ body {
 
 .float-down {
   animation: floatDown 1s ease-out forwards;
-  pointer-events: none;
   position: absolute;
   left: 0;
   right: 0;
@@ -113,9 +112,9 @@ body {
 .form-delay {
   animation-delay: 3000ms;  /* Form appears after button movement */
 }
-
 .form-fade-in {
   animation: fadeIn 1s ease-in forwards;
   animation-delay: 1s;
   opacity: 0;
 }
+

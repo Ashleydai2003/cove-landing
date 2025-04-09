@@ -2,12 +2,20 @@
 
 import { Libre_Bodoni, Berkshire_Swash } from 'next/font/google'
 import { useState, ChangeEvent } from 'react'
+import { notion } from '@/lib/notion';
 
 interface FormData {
   fullName: string;
   phoneNumber: string;
   city: string;
   age: string;
+}
+
+interface FormErrors {
+  fullName: boolean;
+  phoneNumber: boolean;
+  city: boolean;
+  age: boolean;
 }
 
 const berkshireSwash = Berkshire_Swash({
@@ -31,6 +39,60 @@ export default function Home() {
     city: '',
     age: ''
   });
+  const [formErrors, setFormErrors] = useState<FormErrors>({
+    fullName: false,
+    phoneNumber: false,
+    age: false,
+    city: false
+  });
+
+  const validateForm = () => {
+    const newErrors = {
+      fullName: !formData.fullName.trim(),
+      phoneNumber: !formData.phoneNumber.trim(),
+      age: !formData.age.trim(),
+      city: !formData.city.trim()
+    };
+    setFormErrors(newErrors);
+    return !Object.values(newErrors).some(error => error);
+  };
+
+  const handleButtonClick = async () => {
+    if (buttonAnimationComplete) {
+      if (validateForm()) {
+        try {
+          // Submit to Notion database
+          console.log('Client - Attempting to create Notion page...');
+          console.log('Client - Form data:', formData);
+          
+          const response = await fetch('/api/notion', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+          });
+
+          const result = await response.json();
+          
+          if (!response.ok) {
+            console.error('Client - API Error Response:', result);
+            throw new Error(result.error || 'Failed to submit form');
+          }
+
+          console.log('Client - Success Response:', result);
+        } catch (error) {
+          console.error('Client - Detailed Notion error:', error);
+          if (error instanceof Error) {
+            console.error('Client - Error message:', error.message);
+            console.error('Client - Error stack:', error.stack);
+          }
+        }
+      } else {
+        console.log('Some fields are empty!');
+      }
+    }
+  };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -114,6 +176,7 @@ export default function Home() {
               <div className="relative">
                 <button 
                   onAnimationEnd={() => setButtonAnimationComplete(true)}
+                  onClick={handleButtonClick}
                   className={`${libreBodoni.className} px-11 py-3 bg-[#7a3131ff] text-white dark:bg-white dark:text-black rounded-md font-bold float-down absolute ${buttonAnimationComplete ? 'hover:bg-[#4a1919] dark:hover:bg-gray-200 transition-colors duration-300' : ''}`}
                   style={{ transform: buttonAnimationComplete ? 'translateY(300px)' : '' }}
                 >
@@ -129,7 +192,7 @@ export default function Home() {
                     value={formData.fullName}
                     onChange={handleInputChange}
                     placeholder="first and last name"
-                    className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50`}
+                    className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border ${formErrors.fullName ? 'border-red-500' : 'border-white/20'} focus:outline-none focus:ring-2 focus:ring-white/50`}
                   />
                   <input
                     type="text"
@@ -137,7 +200,7 @@ export default function Home() {
                     value={formData.phoneNumber}
                     onChange={handleInputChange}
                     placeholder="phone number"
-                    className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50`}
+                    className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border ${formErrors.phoneNumber ? 'border-red-500' : 'border-white/20'} focus:outline-none focus:ring-2 focus:ring-white/50`}
                   />
                   <input
                     type="text"
@@ -145,7 +208,7 @@ export default function Home() {
                     value={formData.city}
                     onChange={handleInputChange}
                     placeholder="city"
-                    className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50`}
+                    className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border ${formErrors.city ? 'border-red-500' : 'border-white/20'} focus:outline-none focus:ring-2 focus:ring-white/50`}
                   />
                   <input
                     type="text"
@@ -153,7 +216,7 @@ export default function Home() {
                     value={formData.age}
                     onChange={handleInputChange}
                     placeholder="age"
-                    className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white/50`}
+                    className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border ${formErrors.age ? 'border-red-500' : 'border-white/20'} focus:outline-none focus:ring-2 focus:ring-white/50`}
                   />
                 </form>
               </div>

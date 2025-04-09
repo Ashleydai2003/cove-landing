@@ -101,7 +101,7 @@ body {
   margin: 0 auto;
 }
 
-.delay-500 {
+.delay-2000 {
   animation-delay: 2000ms;  /* Overlay appears at 2.5 seconds */
 }
 

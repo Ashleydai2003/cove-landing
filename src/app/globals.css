@@ -106,8 +106,8 @@ body {
   animation-delay: 2000ms;  /* Overlay appears at 2.5 seconds */
 }
 
-.delay-1000 {
-  animation-delay: 2500ms;  /* Content appears at 3 seconds */
+  .delay-2500 {
+  animation-delay: 2500ms;  /* Content appears at 2.5 seconds */
 }
 
 .form-delay {

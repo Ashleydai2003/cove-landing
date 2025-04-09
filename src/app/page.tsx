@@ -77,8 +77,8 @@ export default function Home() {
         <div className="absolute inset-0 w-full h-full bg-[url('/image1.jpg')] animate-backgroundRotate" />
       </div>
 
-      {/* Content container with semi-transparent overlay - fades in after 500ms */}
-      <div className="relative z-10 flex items-center justify-center min-h-screen w-full bg-white/60 dark:bg-[#7a3131ff]/80 opacity-0 fade-in delay-500">
+      {/* Content container with semi-transparent overlay - fades in after 2000ms */}
+      <div className="relative z-10 flex items-center justify-center min-h-screen w-full bg-white/60 dark:bg-[#7a3131ff]/80 opacity-0 fade-in delay-2000">
         <div className="flex flex-col items-center">
           {/* Logo and subtitle container */}
           <div>

@@ -57,7 +57,7 @@ body {
 }
 
 .animate-backgroundRotate {
-  animation: backgroundRotate 3.9s cubic-bezier(0.1, 0.1, 0.2, 1) forwards;
+  animation: backgroundRotate 3s cubic-bezier(0.1, 0.1, 0.2, 1) forwards;
   position: absolute;
   inset: 0;
   width: 100%;

@@ -4,17 +4,17 @@ import { Libre_Bodoni, Berkshire_Swash } from 'next/font/google'
 import { useState, ChangeEvent, useEffect } from 'react'
 
 interface FormData {
-  fullName: string;
+  firstName: string;
+  lastName: string;
   phoneNumber: string;
   city: string;
-  age: string;
 }
 
 interface FormErrors {
-  fullName: boolean;
+  firstName: boolean;
+  lastName: boolean;
   phoneNumber: boolean;
   city: boolean;
-  age: boolean;
 }
 
 const berkshireSwash = Berkshire_Swash({
@@ -35,15 +35,15 @@ export default function Home() {
   const [submitted, setSubmitted] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [formData, setFormData] = useState<FormData>({
-    fullName: '',
+    firstName: '',
+    lastName: '',
     phoneNumber: '',
-    city: '',
-    age: ''
+    city: ''
   });
   const [formErrors, setFormErrors] = useState<FormErrors>({
-    fullName: false,
+    firstName: false,
+    lastName: false,
     phoneNumber: false,
-    age: false,
     city: false
   });
 
@@ -111,9 +111,9 @@ export default function Home() {
     const phoneDigits = formData.phoneNumber.replace(/\D/g, '').length;
     
     const newErrors = {
-      fullName: !formData.fullName.trim(),
+      firstName: !formData.firstName.trim(),
+      lastName: !formData.lastName.trim(),
       phoneNumber: !formData.phoneNumber.trim() || phoneDigits < 10,
-      age: !formData.age.trim(),
       city: !formData.city.trim()
     };
     setFormErrors(newErrors);
@@ -177,16 +177,8 @@ export default function Home() {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     
-    // Special handling for age and phone number
-    if (name === 'age') {
-      // Only allow numbers and limit to 3 digits
-      if (value === '' || (/^\d+$/.test(value) && value.length <= 3)) {
-        setFormData(prev => ({
-          ...prev,
-          [name]: value
-        }));
-      }
-    } else if (name === 'phoneNumber') {
+    // Special handling for phone number
+    if (name === 'phoneNumber') {
       // Format phone number as user types
       const cleaned = value.replace(/\D/g, '');
       const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,4})$/);
@@ -197,7 +189,7 @@ export default function Home() {
           [name]: formatted
         }));
       }
-    } else if (name === 'fullName') {
+    } else if (name === 'firstName' || name === 'lastName') {
       // Only allow letters, spaces, and hyphens for names
       if (value === '' || /^[a-zA-Z\s-]+$/.test(value)) {
         setFormData(prev => ({
@@ -272,11 +264,19 @@ export default function Home() {
                       </p>
                       <input
                         type="text"
-                        name="fullName"
-                        value={formData.fullName}
+                        name="firstName"
+                        value={formData.firstName}
                         onChange={handleInputChange}
-                        placeholder="first and last name"
-                        className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border ${formErrors.fullName ? 'border-red-500' : 'border-white/20'} focus:outline-none focus:ring-2 focus:ring-white/50`}
+                        placeholder="first name"
+                        className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border ${formErrors.firstName ? 'border-red-500' : 'border-white/20'} focus:outline-none focus:ring-2 focus:ring-white/50`}
+                      />
+                      <input
+                        type="text"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleInputChange}
+                        placeholder="last name"
+                        className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border ${formErrors.lastName ? 'border-red-500' : 'border-white/20'} focus:outline-none focus:ring-2 focus:ring-white/50`}
                       />
                       <input
                         type="text"
@@ -293,14 +293,6 @@ export default function Home() {
                         onChange={handleInputChange}
                         placeholder="city"
                         className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border ${formErrors.city ? 'border-red-500' : 'border-white/20'} focus:outline-none focus:ring-2 focus:ring-white/50`}
-                      />
-                      <input
-                        type="text"
-                        name="age"
-                        value={formData.age}
-                        onChange={handleInputChange}
-                        placeholder="age"
-                        className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border ${formErrors.age ? 'border-red-500' : 'border-white/20'} focus:outline-none focus:ring-2 focus:ring-white/50`}
                       />
                     </form>
                   </>

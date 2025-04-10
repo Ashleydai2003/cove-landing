@@ -2,7 +2,6 @@
 
 import { Libre_Bodoni, Berkshire_Swash } from 'next/font/google'
 import { useState, ChangeEvent } from 'react'
-import { notion } from '@/lib/notion';
 
 interface FormData {
   fullName: string;

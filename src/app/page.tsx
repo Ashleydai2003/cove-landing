@@ -33,6 +33,8 @@ export default function Home() {
   const [showForm, setShowForm] = useState(false);
   const [buttonAnimationComplete, setButtonAnimationComplete] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
     phoneNumber: '',
@@ -45,26 +47,34 @@ export default function Home() {
     age: false,
     city: false
   });
-  const [imagesLoaded, setImagesLoaded] = useState(false);
 
   /**
-   * Preloads all background images before starting the animation
-   * Uses Promise.all to load images in parallel
-   * Sets imagesLoaded state to true when all images are loaded
+   * Preloads all 14 background images before starting the animation
+   * Updates loading progress as images are loaded
+   * Starts animation only when all images are fully loaded
    */
   useEffect(() => {
     const preloadImages = async () => {
+      // Load all 14 images
       const imageUrls = Array.from({ length: 14 }, (_, i) => `/image${i + 1}.svg`);
-      const loadPromises = imageUrls.map(url => {
+      let loadedCount = 0;
+      
+      const loadPromises = imageUrls.map((url, index) => {
         return new Promise((resolve, reject) => {
           const img = new Image();
           img.src = url;
-          img.onload = resolve;
+          img.onload = () => {
+            loadedCount++;
+            // Update progress percentage
+            setLoadingProgress(Math.round((loadedCount / imageUrls.length) * 100));
+            resolve(null);
+          };
           img.onerror = reject;
         });
       });
 
       try {
+        // Wait for all images to load before starting animation
         await Promise.all(loadPromises);
         setImagesLoaded(true);
       } catch (error) {
@@ -202,6 +212,21 @@ export default function Home() {
         <div 
           className={`absolute inset-0 w-full h-full bg-[url('/image1.jpg')] ${imagesLoaded ? 'animate-backgroundRotate' : ''}`} 
         />
+        {!imagesLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center bg-white/80 dark:bg-[#7a3131ff]/80">
+            <div className="text-center">
+              <div className="w-48 h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-[#7a3131ff] dark:bg-white transition-all duration-300"
+                  style={{ width: `${loadingProgress}%` }}
+                />
+              </div>
+              <p className="mt-2 text-sm text-[#7a3131ff] dark:text-white">
+                Loading... {loadingProgress}%
+              </p>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Content container with semi-transparent overlay - fades in after 2000ms */}

@@ -68,31 +68,49 @@ export default function Home() {
         
         try {
           // Submit to Notion database
-          console.log('Client - Attempting to create Notion page...');
-          console.log('Client - Form data:', formData);
-          
-          const response = await fetch('/api/notion', {
+          const response = await fetch('https://api.notion.com/v1/pages', {
             method: 'POST',
             headers: {
+              'Authorization': `Bearer ${process.env.NEXT_PUBLIC_NOTION_API_KEY}`,
+              'Notion-Version': '2022-06-28',
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify(formData),
+            body: JSON.stringify({
+              parent: { database_id: process.env.NEXT_PUBLIC_NOTION_DATABASE_ID },
+              properties: {
+                Name: {
+                  title: [
+                    {
+                      text: {
+                        content: formData.fullName
+                      }
+                    }
+                  ]
+                },
+                Phone: {
+                  phone_number: formData.phoneNumber
+                },
+                Age: {
+                  number: parseInt(formData.age)
+                },
+                City: {
+                  rich_text: [
+                    {
+                      text: {
+                        content: formData.city
+                      }
+                    }
+                  ]
+                }
+              }
+            }),
           });
 
-          const result = await response.json();
-          
           if (!response.ok) {
-            console.error('Client - API Error Response:', result);
-            throw new Error(result.error || 'Failed to submit form');
+            throw new Error('Failed to submit form');
           }
-
-          console.log('Client - Success Response:', result);
         } catch (error) {
-          console.error('Client - Detailed Notion error:', error);
-          if (error instanceof Error) {
-            console.error('Client - Error message:', error.message);
-            console.error('Client - Error stack:', error.stack);
-          }
+          console.error('Error submitting form:', error);
         }
       } else {
         console.log('Some fields are empty!');

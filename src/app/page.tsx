@@ -51,29 +51,54 @@ export default function Home() {
    * Preloads all 14 background images before starting the animation
    */
   useEffect(() => {
-    const preloadImages = async () => {
-      // Load all 14 images
-      const imageUrls = Array.from({ length: 14 }, (_, i) => `/image${i + 1}.svg`);
-      
-      const loadPromises = imageUrls.map((url) => {
-        return new Promise((resolve, reject) => {
-          const img = new Image();
-          img.src = url;
-          img.onload = () => resolve(null);
-          img.onerror = reject;
-        });
-      });
-
-      try {
-        // Wait for all images to load before starting animation
-        await Promise.all(loadPromises);
-        setImagesLoaded(true);
-      } catch (error) {
-        console.error('Error preloading images:', error);
-      }
+    // Create a function to handle image loading
+    const handleImageLoad = () => {
+      console.log('All images loaded via event listener');
+      setImagesLoaded(true);
     };
 
-    preloadImages();
+    // Create a function to handle image errors
+    const handleImageError = (event: Event) => {
+      const img = event.target as HTMLImageElement;
+      console.error(`Failed to load image: ${img.src}`);
+    };
+
+    // Create and load all images
+    const imageUrls = Array.from({ length: 14 }, (_, i) => `/image${i + 1}.svg`);
+    let loadedCount = 0;
+    
+    // Create a container for all images (hidden)
+    const imageContainer = document.createElement('div');
+    imageContainer.style.display = 'none';
+    document.body.appendChild(imageContainer);
+    
+    // Load each image
+    imageUrls.forEach(url => {
+      const img = new Image();
+      img.src = url;
+      
+      // Add event listeners
+      img.addEventListener('load', () => {
+        loadedCount++;
+        console.log(`Loaded image ${loadedCount}/14`);
+        
+        // If all images are loaded, trigger the animation
+        if (loadedCount === imageUrls.length) {
+          handleImageLoad();
+        }
+      });
+      
+      img.addEventListener('error', handleImageError);
+      
+      // Add to container
+      imageContainer.appendChild(img);
+    });
+    
+    // Cleanup function
+    return () => {
+      // Remove event listeners and container
+      imageContainer.remove();
+    };
   }, []);
 
   /**

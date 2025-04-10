@@ -18,13 +18,22 @@ export async function POST(request: Request) {
       }, { status: 400 });
     }
 
+    // Validate environment variables
+    if (!process.env.NOTION_DATABASE_ID) {
+      console.error('API Route - NOTION_DATABASE_ID is not set');
+      return NextResponse.json({ 
+        success: false, 
+        error: 'Server configuration error' 
+      }, { status: 500 });
+    }
+
     console.log('API Route - Attempting to create Notion page...');
     
     // Create a new page in the Notion database
     const response = await notion.pages.create({
       // Specify which database to add the page to
       parent: {
-        database_id: '1d0df4227f458082b526e20f15cbd891',
+        database_id: process.env.NOTION_DATABASE_ID,
       },
       // Map form fields to Notion database columns
       properties: {

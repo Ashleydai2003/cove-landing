@@ -1,10 +1,8 @@
 import { Client } from '@notionhq/client';
 
-// Initialize Notion client with direct API key
+// Initialize Notion client with API key from environment variables
 const notion = new Client({
-  auth: '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', // Replace this with your actual API key
+  auth: process.env.NOTION_API_KEY,
 });
-
-console.log('Notion client initialized with auth:', notion.auth);
 
 export { notion }; 

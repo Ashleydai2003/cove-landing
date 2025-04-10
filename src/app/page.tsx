@@ -2,7 +2,6 @@
 
 import { Libre_Bodoni, Berkshire_Swash } from 'next/font/google'
 import { useState, ChangeEvent, useEffect } from 'react'
-import { notion } from '@/lib/notion';
 
 interface FormData {
   fullName: string;
@@ -282,7 +281,7 @@ export default function Home() {
                 ) : (
                   <div className="flex flex-col items-center gap-4 fade-in">
                     <h2 className={`${libreBodoni.className} text-4xl text-[#7a3131ff] dark:text-white text-center`}>
-                      you're in!
+                      you&apos;re in!
                     </h2>
                     <p className={`${libreBodoni.className} text-xl text-center text-[#7a3131ff] dark:text-white`}>
                       stay tuned for a message from us.

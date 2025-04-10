@@ -59,7 +59,7 @@ export default function Home() {
       const imageUrls = Array.from({ length: 14 }, (_, i) => `/image${i + 1}.svg`);
       let loadedCount = 0;
       
-      const loadPromises = imageUrls.map((url, index) => {
+      const loadPromises = imageUrls.map((url) => {
         return new Promise((resolve, reject) => {
           const img = new Image();
           img.src = url;

@@ -1,7 +1,7 @@
 'use client';
 
 import { Libre_Bodoni, Berkshire_Swash } from 'next/font/google'
-import { useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent, useEffect } from 'react'
 import { notion } from '@/lib/notion';
 
 interface FormData {
@@ -46,6 +46,30 @@ export default function Home() {
     age: false,
     city: false
   });
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+
+  useEffect(() => {
+    const preloadImages = async () => {
+      const imageUrls = Array.from({ length: 14 }, (_, i) => `/image${i + 1}.svg`);
+      const loadPromises = imageUrls.map(url => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.src = url;
+          img.onload = resolve;
+          img.onerror = reject;
+        });
+      });
+
+      try {
+        await Promise.all(loadPromises);
+        setImagesLoaded(true);
+      } catch (error) {
+        console.error('Error preloading images:', error);
+      }
+    };
+
+    preloadImages();
+  }, []);
 
   const validateForm = () => {
     // Count digits in phone number
@@ -152,7 +176,9 @@ export default function Home() {
     <div className="relative min-h-screen w-full overflow-hidden">
       {/* Background image container */}
       <div className="fixed inset-0 w-full h-full">
-        <div className="absolute inset-0 w-full h-full bg-[url('/image1.jpg')] animate-backgroundRotate" />
+        <div 
+          className={`absolute inset-0 w-full h-full bg-[url('/image1.jpg')] ${imagesLoaded ? 'animate-backgroundRotate' : ''}`} 
+        />
       </div>
 
       {/* Content container with semi-transparent overlay - fades in after 2000ms */}

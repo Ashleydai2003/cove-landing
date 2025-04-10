@@ -1,7 +1,7 @@
 'use client';
 
 import { Libre_Bodoni, Berkshire_Swash } from 'next/font/google'
-import { useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent, useEffect } from 'react'
 
 interface FormData {
   fullName: string;
@@ -45,7 +45,41 @@ export default function Home() {
     age: false,
     city: false
   });
+  const [imagesLoaded, setImagesLoaded] = useState(false);
 
+  /**
+   * Preloads all background images before starting the animation
+   * Uses Promise.all to load images in parallel
+   * Sets imagesLoaded state to true when all images are loaded
+   */
+  useEffect(() => {
+    const preloadImages = async () => {
+      const imageUrls = Array.from({ length: 14 }, (_, i) => `/image${i + 1}.svg`);
+      const loadPromises = imageUrls.map(url => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.src = url;
+          img.onload = resolve;
+          img.onerror = reject;
+        });
+      });
+
+      try {
+        await Promise.all(loadPromises);
+        setImagesLoaded(true);
+      } catch (error) {
+        console.error('Error preloading images:', error);
+      }
+    };
+
+    preloadImages();
+  }, []);
+
+  /**
+   * Validates the form data by checking if all required fields are filled
+   * and if the phone number has the correct format (10 digits)
+   * @returns boolean indicating if the form is valid
+   */
   const validateForm = () => {
     // Count digits in phone number
     const phoneDigits = formData.phoneNumber.replace(/\D/g, '').length;
@@ -60,6 +94,11 @@ export default function Home() {
     return !Object.values(newErrors).some(error => error);
   };
 
+  /**
+   * Handles the form submission when the button is clicked
+   * Validates the form data and submits it to the Notion database
+   * Triggers animations based on submission state
+   */
   const handleButtonClick = async () => {
     if (buttonAnimationComplete && !submitted) {
       if (validateForm()) {
@@ -100,6 +139,15 @@ export default function Home() {
     }
   };
 
+  /**
+   * Handles input changes for all form fields
+   * Applies specific formatting and validation rules for each field:
+   * - Age: Only numbers, max 3 digits
+   * - Phone: Formats as XXX-XXX-XXXX
+   * - Name: Only letters, spaces, and hyphens
+   * - City: Only letters, spaces, and hyphens
+   * @param e ChangeEvent from the input element
+   */
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     
@@ -151,7 +199,9 @@ export default function Home() {
     <div className="relative min-h-screen w-full overflow-hidden">
       {/* Background image container */}
       <div className="fixed inset-0 w-full h-full">
-        <div className="absolute inset-0 w-full h-full bg-[url('/image1.jpg')] animate-backgroundRotate" />
+        <div 
+          className={`absolute inset-0 w-full h-full bg-[url('/image1.jpg')] ${imagesLoaded ? 'animate-backgroundRotate' : ''}`} 
+        />
       </div>
 
       {/* Content container with semi-transparent overlay - fades in after 2000ms */}

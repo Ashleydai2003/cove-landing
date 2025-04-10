@@ -226,7 +226,7 @@ export default function Home() {
       {/* Background image container */}
       <div className="fixed inset-0 w-full h-full">
         <div 
-          className={`absolute inset-0 w-full h-full bg-[url('/image1.jpg')] ${imagesLoaded ? 'animate-backgroundRotate' : ''}`} 
+          className={`absolute inset-0 w-full h-full bg-[url('/image1.svg')] ${imagesLoaded ? 'animate-backgroundRotate' : ''}`} 
         />
       </div>
 

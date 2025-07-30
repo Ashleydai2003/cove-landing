@@ -8,6 +8,7 @@ interface FormData {
   lastName: string;
   phoneNumber: string;
   city: string;
+  almaMater: string;
 }
 
 interface FormErrors {
@@ -15,6 +16,7 @@ interface FormErrors {
   lastName: boolean;
   phoneNumber: boolean;
   city: boolean;
+  almaMater: boolean;
 }
 
 const berkshireSwash = Berkshire_Swash({
@@ -38,13 +40,15 @@ export default function Home() {
     firstName: '',
     lastName: '',
     phoneNumber: '',
-    city: ''
+    city: '',
+    almaMater: ''
   });
   const [formErrors, setFormErrors] = useState<FormErrors>({
     firstName: false,
     lastName: false,
     phoneNumber: false,
-    city: false
+    city: false,
+    almaMater: false
   });
 
   /**
@@ -114,7 +118,8 @@ export default function Home() {
       firstName: !formData.firstName.trim(),
       lastName: !formData.lastName.trim(),
       phoneNumber: !formData.phoneNumber.trim() || phoneDigits < 10,
-      city: !formData.city.trim()
+      city: !formData.city.trim(),
+      almaMater: !formData.almaMater.trim()
     };
     setFormErrors(newErrors);
     return !Object.values(newErrors).some(error => error);
@@ -205,6 +210,14 @@ export default function Home() {
           [name]: value
         }));
       }
+    } else if (name === 'almaMater') {
+      // Allow letters, spaces, and hyphens for almaMater
+      if (value === '' || /^[a-zA-Z\s-]+$/.test(value)) {
+        setFormData(prev => ({
+          ...prev,
+          [name]: value
+        }));
+      }
     } else {
       setFormData(prev => ({
         ...prev,
@@ -254,7 +267,7 @@ export default function Home() {
                       onAnimationEnd={() => setButtonAnimationComplete(true)}
                       onClick={handleButtonClick}
                       className={`${libreBodoni.className} px-11 py-3 bg-[#7a3131ff] text-white dark:bg-white dark:text-black rounded-md font-bold float-down absolute ${buttonAnimationComplete ? 'hover:bg-[#3a1010] dark:hover:bg-gray-200 transition-colors duration-300' : ''}`}
-                      style={{ transform: buttonAnimationComplete ? 'translateY(300px)' : '' }}
+                      style={{ transform: buttonAnimationComplete ? 'translateY(400px)' : '' }}
                     >
                       join the waitlist
                     </button>
@@ -293,6 +306,14 @@ export default function Home() {
                         onChange={handleInputChange}
                         placeholder="city"
                         className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border ${formErrors.city ? 'border-red-500' : 'border-white/20'} focus:outline-none focus:ring-2 focus:ring-white/50`}
+                      />
+                      <input
+                        type="text"
+                        name="almaMater"
+                        value={formData.almaMater}
+                        onChange={handleInputChange}
+                        placeholder="alma mater"
+                        className={`${libreBodoni.className} px-4 py-2 rounded-md bg-[#7a3131] text-white placeholder-white/70 border ${formErrors.almaMater ? 'border-red-500' : 'border-white/20'} focus:outline-none focus:ring-2 focus:ring-white/50`}
                       />
                     </form>
                   </>

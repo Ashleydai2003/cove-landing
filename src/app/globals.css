@@ -84,7 +84,7 @@ body {
     transform: translateY(0);
   }
   100% {
-    transform: translateY(300px);
+    transform: translateY(350px);
   }
 }
 

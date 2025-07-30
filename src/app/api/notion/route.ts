@@ -10,7 +10,7 @@ export async function POST(request: Request) {
     console.log('API Route - Received form data:', body);
     
     // Check if all required fields are present
-    if (!body.firstName || !body.lastName || !body.phoneNumber || !body.city) {
+    if (!body.firstName || !body.lastName || !body.phoneNumber || !body.city || !body.almaMater) {
       console.log('API Route - Missing required fields');
       return NextResponse.json({ 
         success: false, 
@@ -67,6 +67,16 @@ export async function POST(request: Request) {
             {
               text: {
                 content: body.city
+              }
+            }
+          ]
+        },
+        // Alma Mater field (rich text type in Notion)
+        AlmaMater: {
+          rich_text: [
+            {
+              text: {
+                content: body.almaMater
               }
             }
           ]

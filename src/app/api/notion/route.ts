@@ -80,6 +80,12 @@ export async function POST(request: Request) {
               }
             }
           ]
+        },
+        // Timestamp field (date type in Notion)
+        Timestamp: {
+          date: {
+            start: new Date().toISOString()
+          }
         }
       }
     });

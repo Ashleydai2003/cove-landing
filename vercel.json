@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/events/(.*)",
+      "destination": "https://coveweb-beryl.vercel.app/events/$1"
+    },
+    {
+      "source": "/events",
+      "destination": "https://coveweb-beryl.vercel.app/events"
+    }
+  ]
+} 

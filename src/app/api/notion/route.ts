@@ -10,7 +10,7 @@ export async function POST(request: Request) {
     console.log('API Route - Received form data:', body);
     
     // Check if all required fields are present
-    if (!body.firstName || !body.lastName || !body.phoneNumber || !body.city || !body.almaMater) {
+    if (!body.fullName || !body.phoneNumber || !body.city || !body.age) {
       console.log('API Route - Missing required fields');
       return NextResponse.json({ 
         success: false, 
@@ -37,22 +37,12 @@ export async function POST(request: Request) {
       },
       // Map form fields to Notion database columns
       properties: {
-        // First name field (title type in Notion)
-        First: {
+        // Name field (title type in Notion)
+        Name: {
           title: [
             {
               text: {
-                content: body.firstName
-              }
-            }
-          ]
-        },
-        // Last name field (rich text type in Notion)
-        Last: {
-          rich_text: [
-            {
-              text: {
-                content: body.lastName
+                content: body.fullName
               }
             }
           ]
@@ -61,22 +51,16 @@ export async function POST(request: Request) {
         Phone: {
           phone_number: body.phoneNumber
         },
+        // Age field (number type in Notion)
+        Age: {
+          number: parseInt(body.age)
+        },
         // City field (rich text type in Notion)
         City: {
           rich_text: [
             {
               text: {
                 content: body.city
-              }
-            }
-          ]
-        },
-        // Alma Mater field (rich text type in Notion)
-        AlmaMater: {
-          rich_text: [
-            {
-              text: {
-                content: body.almaMater
               }
             }
           ]

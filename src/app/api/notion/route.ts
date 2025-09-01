@@ -60,7 +60,7 @@ export async function POST(request: Request) {
           rich_text: [
             {
               text: {
-                content: body.city
+                content: body.city.toLowerCase()
               }
             }
           ]
